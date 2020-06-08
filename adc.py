@@ -153,6 +153,9 @@ class DCA1000:
         self.config_socket.sendto(codecs.decode('5aa509000000aaee','hex'),self.cfg_dest)
         time.sleep(1)
         self.config_socket.sendto(codecs.decode('5aa505000000aaee','hex'),self.cfg_dest)
+    
+    def send_stop_command(self):
+        self.config_socket.sendto(codecs.decode('5aa506000000aaee','hex'),self.cfg_dest)
 
     def close(self):
         """Closes the sockets that are used for receiving and sending data
