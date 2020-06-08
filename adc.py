@@ -16,6 +16,7 @@ import struct
 from enum import Enum
 
 import numpy as np
+import time
 
 
 class CMD(Enum):
@@ -42,10 +43,10 @@ class CMD(Enum):
 CONFIG_HEADER = '5aa5'
 CONFIG_STATUS = '0000'
 CONFIG_FOOTER = 'aaee'
-ADC_PARAMS = {'chirps': 128,  # 32
+ADC_PARAMS = {'chirps': 16,  # 32
               'rx': 4,
-              'tx': 3,
-              'samples': 128,
+              'tx': 1,
+              'samples': 256,
               'IQ': 2,
               'bytes': 2}
 # STATIC
@@ -145,6 +146,13 @@ class DCA1000:
         # CONFIG_PACKET_DATA_CMD_CODE 
         # 5a a5 0b 00 06 00 c0 05 35 0c 00 00 aa ee
         print(self._send_command(CMD.CONFIG_PACKET_DATA_CMD_CODE, '0600', 'c005350c0000'))
+    
+    def send_start_command(self):
+        self.config_socket.sendto(codecs.decode('5aa50300060001020102031eaaee','hex'), self.cfg_dest)
+        time.sleep(1)
+        self.config_socket.sendto(codecs.decode('5aa509000000aaee','hex'),self.cfg_dest)
+        time.sleep(1)
+        self.config_socket.sendto(codecs.decode('5aa505000000aaee','hex'),self.cfg_dest)
 
     def close(self):
         """Closes the sockets that are used for receiving and sending data

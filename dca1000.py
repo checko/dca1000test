@@ -22,7 +22,7 @@ sockcfg.sendto(codecs.decode('5aa505000000aaee','hex'),DCA1000IP)
 pp=0;
 packet_num = []
 byte_count = []
-for i in range(10):
+for i in range(100):
     data, addr = sockdata.recvfrom(4096)
     packet_num.append(struct.unpack('<1l', data[:4])[0])
     byte_count.append(struct.unpack('>Q', b'\x00\x00' + data[4:10][::-1])[0])
