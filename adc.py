@@ -148,14 +148,12 @@ class DCA1000:
         print(self._send_command(CMD.CONFIG_PACKET_DATA_CMD_CODE, '0600', 'c005350c0000'))
     
     def send_start_command(self):
-        self.config_socket.sendto(codecs.decode('5aa50300060001020102031eaaee','hex'), self.cfg_dest)
-        time.sleep(1)
-        self.config_socket.sendto(codecs.decode('5aa509000000aaee','hex'),self.cfg_dest)
-        time.sleep(1)
-        self.config_socket.sendto(codecs.decode('5aa505000000aaee','hex'),self.cfg_dest)
+        print(self._send_command(CMD.CONFIG_FPGA_GEN_CMD_CODE,'0600','01020102031e'))
+        print(self._send_command(CMD.SYSTEM_CONNECT_CMD_CODE))
+        print(self._send_command(CMD.RECORD_START_CMD_CODE))
     
     def send_stop_command(self):
-        self.config_socket.sendto(codecs.decode('5aa506000000aaee','hex'),self.cfg_dest)
+        print(self._send_command(CMD.RECORD_STOP_CMD_CODE))
 
     def close(self):
         """Closes the sockets that are used for receiving and sending data
