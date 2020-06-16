@@ -22,3 +22,11 @@ for i in range(32*4):
     plt.show(block=False)
     plt.pause(0.01)
     plt.clf()
+
+range_plot = np.fft.fft(frame,axis=1)
+plt.imshow(np.abs(range_plot))
+plt.pause(1)
+
+range_doppler = np.fft.fft(range_plot,axis=0)
+plt.imshow(np.abs(range_doppler))
+plt.pause(1)
