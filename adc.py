@@ -152,10 +152,10 @@ class DCA1000:
         print(self._send_command(CMD.SYSTEM_CONNECT_CMD_CODE))
     
     def send_start_command(self):
-        print(self._send_command(CMD.RECORD_START_CMD_CODE))
+        self._send_command(CMD.RECORD_START_CMD_CODE)
     
     def send_stop_command(self):
-        print(self._send_command(CMD.RECORD_STOP_CMD_CODE))
+        self._send_command(CMD.RECORD_STOP_CMD_CODE)
 
     def close(self):
         """Closes the sockets that are used for receiving and sending data
